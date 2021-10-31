@@ -103,7 +103,28 @@ async function run (){
             res.send(result);
         })
 
-        
+        // Update Data API
+        app.put('/tourManage/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id:ObjectId(id)};
+            const updateData = req.body; 
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                  status: updateData.status
+                },
+              };
+
+            const result = await tourUserCollection.updateOne(query, updateDoc, options)
+            res.send(result)
+            
+        })
+
+
+
+
+
+
     }
     finally{
 
