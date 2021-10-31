@@ -87,6 +87,22 @@ async function run (){
             res.send(result);
         })
 
+        // user Data api
+        app.get('/userTour/:email', async (req, res)=>{
+            const email = req.params.email;
+            const query = {email: email};
+            const result = await tourUserCollection.find(query).toArray();
+            res.send(result);
+        })
+
+        // user Data delete API
+        app.delete('/userTour/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await tourUserCollection.deleteOne(query);
+            res.send(result);
+        })
+
         
     }
     finally{
